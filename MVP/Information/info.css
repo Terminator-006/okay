@@ -244,6 +244,8 @@ input.error {
   height: 88px;
   align-items: center;
   margin-top: 10px;
+  position:relative;
+  bottom:0;
   
 }
 
@@ -350,4 +352,11 @@ button:enabled {
 
 .date-input-container::after {
   right: 16px;
+}
+
+@media (min-height:800px){
+  .button-container{
+    position: fixed;
+
+  }
 }

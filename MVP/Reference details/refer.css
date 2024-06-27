@@ -141,7 +141,7 @@ html {
   height: 88px;
   align-items: center;
   margin-top: 10px;
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 
@@ -194,7 +194,13 @@ button:enabled {
       width: 94.6vw;
   }
 
-  .button-container {
+  .button-container button{
       width: 94.6vw;
+  }
+}
+
+@media (min-height:800px){
+  .button-container{
+    position: fixed;
   }
 }
