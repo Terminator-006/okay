@@ -160,6 +160,9 @@ input[type="number"] {
     opacity: 1;
     cursor: pointer;
   }
+  .design a{
+    text-decoration: none;
+  }
 
 @media (max-width: 650px) {
     .container, .button-container button, input[type="number"] {

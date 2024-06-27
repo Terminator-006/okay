@@ -165,6 +165,9 @@ body, html {
   cursor: not-allowed;
   transition: opacity 0.2s, cursor 0.2s;
 }
+.back a{
+  text-decoration: none;
+}
 
 
 .button-container button:enabled {

@@ -164,3 +164,7 @@ body,html{
     opacity: 1;
     cursor: pointer;
   }
+
+  .back a{
+    text-decoration: none;
+  }

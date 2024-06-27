@@ -269,6 +269,9 @@ button:enabled {
   opacity: 1;
   cursor: pointer;
 }
+.back a{
+  text-decoration: none;
+}
 
 @media (max-width: 550px) {
   .heading {
