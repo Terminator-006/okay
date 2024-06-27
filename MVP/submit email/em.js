@@ -74,11 +74,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  nextButton.addEventListener('click', function () {
+  nextButton.addEventListener('click', async function () {
     if (!nextButton.disabled) {
-      window.location.href = '../Otp validation/index.html';
+        const email = emailInput.value.trim();
+
+        // Save email to local storage
+        localStorage.setItem('userEmail', email);
+
+        // Send OTP request to the backend
+        const response = await fetch('https://regnum-backend-bice.vercel.app/send-otp', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+            // Redirect to OTP verification page
+            window.location.href = '../Otp validation/index.html';
+        } else {
+            showErrorMessage('Error sending OTP. Please try again.');
+        }
     }
-  });
+});
 
   // Focus Event Handler
   emailInput.addEventListener('focus', function () {
