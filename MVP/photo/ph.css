@@ -1,0 +1,140 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+@font-face {
+    font-family: 'Victor Serif';
+    src: url('../Victor Serif/VictorSerifTrial-40Regular.otf');
+}
+.body-box{
+    width:100%;
+    margin:auto;
+    height: 100%;
+    position: absolute;
+    font-family: 'Victor Serif';
+}
+.back-arrow{
+    position: absolute;
+    height:56px;
+    width:56px;
+    top:0;
+    left:0;
+}
+.back-arrow a{
+    text-decoration: none;
+}
+
+.camera-img{
+    margin-bottom:16px;
+}
+
+.heading{
+    /* height:28px; */
+    margin-bottom: 4px;
+    font-size:24px;
+    line-height:28px;
+    font-weight: 600;
+}
+
+.description-text{
+    
+    font-size:16px;
+    line-height:24x;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.content-box{
+    /* border: 2px solid orange; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:56px;
+    margin-bottom:156px;
+}
+
+
+.big-box{
+    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+.card-box{
+    /* border: 1px solid black ; */
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:16px;
+    padding:8px;
+    margin-bottom:24px;
+}
+.box{
+    border: 1px solid black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    height: 160px;
+    width: 160px;
+    padding:16px; 
+    cursor: pointer;
+}
+
+.box p{
+    font-size:16px;
+    color: grey;
+    line-height: 24px;
+    font-weight: 400;
+    margin-bottom:-16px;
+}
+.box input[type="file"] {
+    display: none;
+}
+.gender-name{
+    position: relative;
+}
+.female{
+    position: absolute;
+    left: 50%;
+    display: inline-block;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    padding: 16px 16px 24px 16px;
+    height: 88px;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    bottom: 0;
+  }
+  
+  .button-container button {
+    width: 540px;
+    max-width: 540px;
+    height: 48px;
+    border-radius: 100px;
+    padding: 11px 10px 13px 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Victor Serif';
+    font-weight: 600;
+    opacity: 0.5;
+    cursor: not-allowed;
+    transition: opacity 0.2s, cursor 0.2s;
+  }
+  
+  button:enabled {
+    opacity: 1;
+    cursor: pointer;
+  
+  }
