@@ -86,21 +86,40 @@ document.addEventListener('DOMContentLoaded', function () {
             const otp = otpInput.value.trim();
 
             // Send OTP verification request to the backend
-            const response = await fetch('https://regnum-backend-bice.vercel.app/verify-otp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, otp }),
-            });
+            try {
+                const response = await fetch('https://regnum-backend-bice.vercel.app/verify-otp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, otp }),
+                });
 
-            // const result = await response.json();
+                if (response.ok) {
+                    alert('OTP verified successfully!');
 
-            if (response.ok) {
-                alert('OTP verified successfully!');
-                window.location.href = '../Information/index.html'; // Redirect to next page
-            } else {
-                showErrorMessage(response.error || 'Error verifying OTP. Please try again.');
+                    // Create an entry in the database after OTP verification
+                    const createUserEntryResponse = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email }),
+                    });
+
+                    if (createUserEntryResponse.ok) {
+                        window.location.href = '../Information/index.html'; // Redirect to next page
+                    } else {
+                        const errorData = await createUserEntryResponse.json();
+                        showErrorMessage(errorData.error || 'Error creating user entry. Please try again.');
+                    }
+                } else {
+                    const errorData = await response.json();
+                    showErrorMessage(errorData.error || 'Error verifying OTP. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorMessage('Failed to verify OTP. Please try again later.');
             }
         }
     });

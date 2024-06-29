@@ -1,75 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const emailInput = document.getElementById('email');
-  const inputs = document.querySelectorAll('.content input');
+  // const emailInput = document.getElementById('email');
+  const inputs = document.querySelectorAll('input');
+  console.log(inputs);
   const nextButton = document.getElementById('nextButton'); // Updated ID to 'nextButton'
-  const errorMessage = document.getElementById('error');
-  const errorIcon = document.querySelector('.danger-triangle');
-  let timeoutId = null;
-
-  emailInput.addEventListener('input', function () {
-    clearTimeout(timeoutId);
-    const email = emailInput.value.trim(); // Trim whitespace from input
-
-    if (email === '') {
-      resetValidation();
-      return;
-    }
-
-    emailInput.classList.add('typing'); // Add typing class when input is not empty
-    emailInput.classList.remove('error'); // Remove error class when typing
-    hideErrorMessage(); // Hide error message and reset styles when typing starts again
-
-    timeoutId = setTimeout(function () {
-      validateEmail(email);
-    }, 1500);
-  });
-
-  function validateEmail(email) {
-    // Regular expression for basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(email)) {
-      showErrorMessage('Please enter a valid email address');
-      emailInput.classList.add('error');
-      emailInput.classList.remove('typing'); // Remove typing class if there is an error
-    } else {
-      hideErrorMessage();
-      emailInput.classList.remove('error');
-    }
-
-    updateButtonState();
-  }
-
-  function resetValidation() {
-    hideErrorMessage();
-    emailInput.classList.remove('error');
-    updateButtonState();
-  }
-
-  function showErrorMessage(message) {
-    errorMessage.textContent = message;
-    errorMessage.style.display = 'flex'; // Show error message as flex
-    errorIcon.style.display = 'block';
-    emailInput.style.border = '3px solid red'; // Ensure border remains red
-
-    // Adjust content layout for error message
-    const content = document.querySelector('.content');
-    content.classList.add('error-visible');
-  }
-
-  function hideErrorMessage() {
-    errorMessage.style.display = 'none';
-    errorIcon.style.display = 'none';
-    if (!emailInput.classList.contains('focused')) {
-      emailInput.style.border = '2px solid grey'; // Reset border color if not focused
-    } else {
-      emailInput.style.border = '3px solid black'; // Set default border on focus if not in error state
-    }
-
-    // Adjust content layout when error message is hidden
-    const content = document.querySelector('.content');
-    content.classList.remove('error-visible');
-  }
+ console.log("inside js");
 
   function updateButtonState() {
     let allFilled = true;
@@ -79,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    if (emailInput.classList.contains('error') || emailInput.value.trim() === '' || !allFilled) {
+    if (!allFilled) {
       nextButton.disabled = true;
       nextButton.style.opacity = '0.5'; // Set opacity to 0.5
       nextButton.style.cursor = 'not-allowed'; // Set cursor to not-allowed
@@ -90,33 +24,40 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  nextButton.addEventListener('click', function () {
-    
+  nextButton.addEventListener('click', async function () {
+    console.log("Button Clicked!");
     if (!nextButton.disabled) {
-      window.location.href = '../Financial/index.html'; // Redirect to the next page
+      const email = localStorage.getItem('userEmail');
+      let data = {}
+      data["email"] = email;
+      data["FullName"] = document.getElementById("name").value;
+      console.log(document.getElementById("name"));
+      data["DateOfBirth"] = document.getElementById("dob").value;
+      data["City"] = document.getElementById("city").value;
+      data["PhoneNumber"] = document.getElementById("phoneNumber").value;
+      data["CountryCode"] = document.getElementById("countryCode").value;
+      console.log(data);
+      try {
+        const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          alert("submitted!");
+          window.location.href = '../Financial/index.html'; // Redirect to the next page
+        } else {
+          const errorData = await response.json();
+          console.error('Error updating user information:', errorData);
+        }
+      } catch (error) {
+        console.error('Error updating user information:', error);
+      }
     }
   });
 
-  // Focus Event Handler
-  emailInput.addEventListener('focus', function () {
-    emailInput.classList.add('focused');
-    if (!emailInput.classList.contains('error')) {
-      emailInput.style.border = '3px solid black'; // Set default border on focus
-    }
-  });
-
-  // Blur Event Handler
-  emailInput.addEventListener('blur', function () {
-    emailInput.classList.remove('focused');
-    if (!emailInput.classList.contains('error')) {
-      emailInput.style.border = '2px solid grey'; // Reset border color to grey on blur
-    }
-    if (emailInput.value.trim() === '') {
-      emailInput.style.border = '1px solid black'; // Reset border to black if input is empty
-    }
-    emailInput.style.borderRadius = '6px';
-  });
-
+  
   // Add functionality for other inputs
   inputs.forEach(input => {
     input.addEventListener('input', function () {
@@ -189,4 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   });
+  updateButtonState();
 });
+

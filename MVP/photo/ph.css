@@ -80,11 +80,15 @@
     justify-content: center;
     align-items: center;
     gap: 16px;
-    height: 160px;
-    width: 160px;
-    padding:16px; 
+    height: 192px;
+    width: 192px;
+    
     cursor: pointer;
 }
+span{
+    margin-left:9px;
+}
+
 
 .box p{
     font-size:16px;
@@ -138,3 +142,35 @@
     cursor: pointer;
   
   }
+
+  @media(max-width:420px){
+    .body-box{
+        width:100vw;
+    }
+
+    span{
+        margin-left:2vw;
+    }
+
+    .content-box{
+        width:100vw;
+    }
+
+    .big-box{
+        width:100vw;
+    }
+
+    .button-container button{
+        width: 94.6vw;
+    }
+  }
+
+  @media (min-height:970px){
+    .button-container{
+        position:fixed;
+    }
+    .button-container button{
+        width: 94.6vw;
+    }
+  }
+  

@@ -77,12 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+
     nextButton.addEventListener('click', function () {
-        
         if (!nextButton.disabled) {
-          window.location.href = '../Reference details/index.html'; // Redirect to the next page
+            window.location.href = '../Reference details/index.html'; // Redirect to the next page
         }
-      });}
-
-);
-
+    });
+});

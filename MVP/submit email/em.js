@@ -82,12 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('userEmail', email);
 
         // Send OTP request to the backend
+        console.log(email);
         const response = await fetch('https://regnum-backend-bice.vercel.app/send-otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ email })
         });
 
         if (response.ok) {

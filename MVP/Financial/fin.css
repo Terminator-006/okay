@@ -77,12 +77,13 @@ body, html {
 }
 
 .content {
-    height: 392px;
+    /* height: 392px; */
     width:100%;
     gap: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: aut;
 }
 
 .first-inp {
