@@ -86,7 +86,7 @@ function previewImage1(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='6px';
+            img.style.borderRadius ='5px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview1');
             imagePreview.innerHTML = '';
@@ -117,7 +117,7 @@ function previewImage2(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='6px';
+            img.style.borderRadius ='5px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview2');
             imagePreview.innerHTML = '';
@@ -148,7 +148,7 @@ function previewImage3(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='6px';
+            img.style.borderRadius ='5px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview3');
             imagePreview.innerHTML = '';
@@ -179,7 +179,7 @@ function previewImage4(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='6px';
+            img.style.borderRadius ='5px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview4');
             imagePreview.innerHTML = '';
