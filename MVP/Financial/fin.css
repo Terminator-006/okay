@@ -116,7 +116,7 @@ body, html {
 .checklist {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    /* width: 100%; */
     /* gap: 16px; */
     margin-top: 8px;
 }
@@ -124,6 +124,7 @@ body, html {
     display: flex;
     align-items: center;
     margin-bottom: 16px; /* Space between each item */
+    color:rgba(0, 0, 0, 0.48);
 }
 
 input[type="checkbox"] {
@@ -171,6 +172,37 @@ input[type="checkbox"]:checked::before {
     position: relative;
     bottom: 0;
   }
+  input[type="checkbox"] {
+    display: none;
+}
+
+.checklist label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checklist label svg {
+    margin-right: 8px;
+    display: none;
+}
+
+input[type="checkbox"] + svg.unchecked {
+    display: inline;
+}
+
+input[type="checkbox"]:checked + svg.unchecked {
+    display: none;
+}
+
+input[type="checkbox"]:checked + svg.checked {
+    display: inline;
+}
+
+input[type="checkbox"] + svg.checked {
+    display: none;
+}
+
   
   .button-container button {
     width: 540px;

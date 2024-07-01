@@ -77,9 +77,41 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
-    nextButton.addEventListener('click', function () {
-        
-        if (!nextButton.disabled) {
-          window.location.href = '../Personal preferences/index.html'; // Redirect to the next page
+    nextButton.addEventListener('click', async function () {
+        const degreeSelect = document.querySelector('select:nth-of-type(1)').value;
+        const almaMaterInput = document.querySelector('input:nth-of-type(1)').value;
+        const membershipSelect = document.querySelector('select:nth-of-type(2)').value;
+        const registrationNumberInput = document.querySelector('input:nth-of-type(2)').value;
+        const instagramIdInput = document.querySelector('input:nth-of-type(3)').value;
+        const exoticPlaceInput = document.querySelector('input:nth-of-type(4)').value;
+        const visaNumberInput = document.querySelector('input:nth-of-type(5)').value;
+
+        const data = {};
+        data["email"] = localStorage.getItem("userEmail");
+        data["Degree"] = degreeSelect;
+        data["AlmaMater"] = almaMaterInput;
+        data["MemberShip"] = membershipSelect;
+        data["RegNumber"] = registrationNumberInput;
+        data["InstaId"] = instagramIdInput;
+        data["ExoticPlace"] = exoticPlaceInput;
+        data["VisaNumber"] = visaNumberInput;
+       console.log(data);
+       try {
+        const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          alert("submitted!");
+          window.location.href = '../Personal preferences/index.html';
+        } else {
+          const errorData = await response.json();
+          console.error('Error updating user information:', errorData);
         }
-      });});
+      } catch (error) {
+        console.error('Error updating user information:', error);
+      }
+      });
+    });

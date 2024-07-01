@@ -9,10 +9,10 @@
 <body>
     <div class="back">
         <a href="../Social Engagement/index.html">
-        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M37 27H24.661C25.882 25.778 26.66 24.114 26.66 22.34V21.34H24.66V22.34C24.66 24.779 22.438 27 20 27H19V29H20C22.438 29 24.66 31.221 24.66 33.66V34.66H26.66V33.66C26.66 31.886 25.882 30.222 24.661 29H37V27Z" fill="black"/>
-        </svg>
-    </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M37 27H24.661C25.882 25.778 26.66 24.114 26.66 22.34V21.34H24.66V22.34C24.66 24.779 22.438 27 20 27H19V29H20C22.438 29 24.66 31.221 24.66 33.66V34.66H26.66V33.66C26.66 31.886 25.882 30.222 24.661 29H37V27Z" fill="black"/>
+            </svg>
+        </a>
     </div>
     <div class="container">
         <div class="heading">
@@ -29,68 +29,99 @@
         </div>
         <div class="content">
             <div class="multiselect">
-                <input type="text" id="travel" class="select-field" placeholder="Travel" readonly>
+                <input type="text" id="TravelPreference" class="select-field" placeholder="Travel" readonly>
                 <div class="dropdown-content">
-                    <option value="Goa">Goa</option>
-                    <option value="Kuala Lumpur">Kuala Lumpur</option>
+                    <div class="checkbox">
+                        <input type="checkbox" id="travel1" value="Goa">
+                        <label for="travel1">Goa</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="travel2" value="Kuala Lumpur">
+                        <label for="travel2">Kuala Lumpur</label>
+                    </div>
                 </div>
                 <div class="dropdown-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
                         <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        </svg>
+                    </svg>
+                </div>
+            </div>
+            <!-- Repeat for other categories -->
+            <div class="multiselect">
+                <input type="text" id="CulturePreference" class="select-field" placeholder="Culture" readonly>
+                <div class="dropdown-content">
+                    <div class="checkbox">
+                        <input type="checkbox" id="cul1" value="Pop">
+                        <label for="cul1">Pop</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="cul2" value="Rock">
+                        <label for="cul2">Rock</label>
+                    </div>
+                </div>
+                <div class="dropdown-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
+                        <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
+                    </svg>
                 </div>
             </div>
             <div class="multiselect">
-                <input type="text" id="culture" class="select-field" placeholder="Culture" readonly>
+                <input type="text" id="DiningPreference" class="select-field" placeholder="Dining" readonly>
                 <div class="dropdown-content">
-                    <option value="Pop">Pop</option>
-                    <option value="Rock">Rock</option>
+                    <div class="checkbox">
+                        <input type="checkbox" id="din1" value="Indian">
+                        <label for="din1">Indian</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="din2" value="Italian">
+                        <label for="din2">Italian</label>
+                    </div>
                 </div>
                 <div class="dropdown-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
                         <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        </svg>
+                    </svg>
                 </div>
             </div>
             <div class="multiselect">
-                <input type="text" id="dining" class="select-field" placeholder="Dining" readonly>
+                <input type="text" id="Hobbies" class="select-field" placeholder="Hobbies" readonly>
                 <div class="dropdown-content">
-                    <option value="Indian">Indian</option>
-                    <option value="Italian">Italian</option>
+                    <div class="checkbox">
+                        <input type="checkbox" id="hob1" value="Gym">
+                        <label for="hob1">Gym</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="hob2" value="Coding">
+                        <label for="hob2">Coding</label>
+                    </div>
                 </div>
                 <div class="dropdown-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
                         <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        </svg>
+                    </svg>
                 </div>
             </div>
             <div class="multiselect">
-                <input type="text" id="hobbies" class="select-field" placeholder="Hobbies" readonly>
+                <input type="text" id="FitnessPreference" class="select-field" placeholder="Fitness" readonly>
                 <div class="dropdown-content">
-                    <option value="Gym">Gym</option>
-                    <option value="Coding">Coding</option>
+                    <div class="checkbox">
+                        <input type="checkbox" id="fit1" value="Pilates">
+                        <label for="fit1">Pilates</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="fit2" value="Yoga">
+                        <label for="fit2">Yoga</label>
+                    </div>
                 </div>
                 <div class="dropdown-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
                         <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        </svg>
-                </div>
-            </div>
-            <div class="multiselect">
-                <input type="text" id="fitness" class="select-field" placeholder="Fitness" readonly>
-                <div class="dropdown-content">
-                    <option value="Pilates">Pilates</option>
-                    <option value="Yoga">Yoga</option>
-                </div>
-                <div class="dropdown-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.75 12C2.75 17.108 6.891 21.25 12 21.25C17.108 21.25 21.25 17.108 21.25 12C21.25 6.892 17.108 2.75 12 2.75C6.891 2.75 2.75 6.892 2.75 12Z" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        <path d="M8.52881 10.5576L11.9998 14.0436L15.4708 10.5576" stroke="black" stroke-width="1.5" stroke-linecap="square"/>
-                        </svg>
+                    </svg>
                 </div>
             </div>
         </div>

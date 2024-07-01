@@ -117,7 +117,7 @@ body, html {
   max-width: 540px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   overflow: hidden;
   max-height: 200px;
   overflow-y: auto;
@@ -130,12 +130,17 @@ body, html {
 }
 
 .dropdown-content option:hover {
-  background-color: #f1f1f1;
-}
+   background-color: #f1f1f1;
+} 
 
 .show {
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 2px 0;
 }
+
+
 
 .button-container {
   display: flex;
@@ -186,6 +191,43 @@ body, html {
   width: 24px;
   height: 24px;
   color: grey;}
+  /* Your existing CSS */
+
+.checkbox input{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.checkbox label {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    padding-left: 25px; /* 10 px padding right + 15px input type*/
+    margin-right: 10px; /* margin between inputs types */
+}
+
+.checkbox label:before {  
+    content: "";
+    width: 15px;
+    height: 15px;
+    position: absolute;  
+    left: 0;
+}
+
+input[type=checkbox] {  
+    display: none;  
+}
+
+.checkbox label:before {
+    background: url('http://i36.photobucket.com/albums/e22/lilsq3/checkbox_small.png') left center no-repeat;
+    margin-top: 2px;
+}
+
+input[type=checkbox]:checked + label:before {  
+    background: url('http://i36.photobucket.com/albums/e22/lilsq3/checkbox_selected_small.png') left center no-repeat;  
+}
+
 
 @media (max-width: 572px) {
   .heading {
@@ -206,6 +248,12 @@ body, html {
   }
   .button-container {
     width: 94.6vw;
+  }
+  .dropdown-content{
+    width:94.6vw
+  }
+  .show{
+    margin-left:0.6rem;
   }
 }
 

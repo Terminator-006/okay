@@ -38,11 +38,12 @@
 }
 
 .description-text{
-    
-    font-size:16px;
-    line-height:24x;
-    font-weight: 400;
     margin-bottom: 24px;
+}
+.description-text p{
+    line-height:24x;
+    font-size:16px;
+    font-weight: 400;
 }
 
 .content-box{
@@ -73,7 +74,7 @@
     margin-bottom:24px;
 }
 .box{
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.48);
     border-radius: 6px;
     display: flex;
     flex-direction: column;
@@ -92,7 +93,7 @@ span{
 
 .box p{
     font-size:16px;
-    color: grey;
+    color: rgba(0, 0, 0, 0.48);
     line-height: 24px;
     font-weight: 400;
     margin-bottom:-16px;

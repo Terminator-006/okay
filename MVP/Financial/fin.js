@@ -77,10 +77,67 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     });
+    function getSelectedCheckboxes() {
+        const selected = [];
+        const checkboxes = document.querySelectorAll('input[name="luxury-item"]');
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selected.push(checkbox.value);
+            }
+        });
+        return selected;
+    }
+    nextButton.addEventListener('click', async function () {
+        const income = document.getElementById("Income").value;
+        console.log(income);
+        const selectedItems = getSelectedCheckboxes();
+        console.log(selectedItems);
+        let data = {};
+        data["email"] = localStorage.getItem("userEmail");
+        data["AnnualIncome"] = income;
+        data["LuxuryAssets"] = selectedItems; 
+        console.log(data);
 
-    nextButton.addEventListener('click', function () {
-        if (!nextButton.disabled) {
-            window.location.href = '../Reference details/index.html'; // Redirect to the next page
-        }
+        try {
+            const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+            });
+    
+            if (response.ok) {
+              alert("submitted!");
+              window.location.href = '../Reference details/index.html';
+            } else {
+              const errorData = await response.json();
+              console.error('Error updating user information:', errorData);
+            }
+          } catch (error) {
+            console.error('Error updating user information:', error);
+          }
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const checked = this.checked;
+            const label = this.parentElement;
+            const svgUnchecked = label.querySelector('.unchecked');
+            const svgChecked = label.querySelector('.checked');
+
+            if (checked) {
+                svgUnchecked.style.display = 'none';
+                svgChecked.style.display = 'inline';
+                label.style.color = 'black';
+            } else {
+                svgUnchecked.style.display = 'inline';
+                svgChecked.style.display = 'none';
+                label.style.color = ''; // Reset to default color
+            }
+        });
+    });
+});
+
+

@@ -16,10 +16,46 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    nextButton.addEventListener('click', function () {
-        if (!nextButton.disabled) {
-            window.location.href = '../Accepted/index.html'; // Redirect to the next page
-        }
+    function getFileInputValues() {
+        const fileInputValues = [];
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+      
+        fileInputs.forEach(input => {
+          if (input.files.length > 0) {
+            fileInputValues.push(input.files[0]);
+          }
+        });
+      
+        return fileInputValues;
+      }
+
+    nextButton.addEventListener('click', async function () {
+        const fileInputValues = getFileInputValues();
+        console.log(typeof(fileInputValues)); // You can use these values as needed
+        let data = {};
+        data["email"] = localStorage.getItem("userEmail");
+        data["CouplePhoto1"] = fileInputValues[0]
+        data["CouplePhoto2"] = fileInputValues[1]
+        data["MalePicture"] = fileInputValues[2]
+        data["FemalePicture"] = fileInputValues[3]
+        console.log(data);
+        try {
+            const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data),
+            });
+    
+            if (response.ok) {
+              alert("submitted!");
+              window.location.href = '../Accepted/index.html';
+            } else {
+              const errorData = await response.json();
+              console.error('Error updating user information:', errorData);
+            }
+          } catch (error) {
+            console.error('Error updating user information:', error);
+          }
     });
 });
 

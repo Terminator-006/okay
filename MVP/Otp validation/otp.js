@@ -1,89 +1,18 @@
+let otp = "";
 document.addEventListener('DOMContentLoaded', function () {
-    const otpInput = document.getElementById('otp');
+    const otpInput1 = document.getElementById('otp1');
+    const otpInput2 = document.getElementById('otp2');
+    const otpInput3 = document.getElementById('otp3');
+    const otpInput4 = document.getElementById('otp4');
+    const otpInput5 = document.getElementById('otp5');
     const nextButton = document.getElementById('next-button');
-    const errorMessage = document.getElementById('error-message');
-    const errorIcon = document.querySelector('.danger-triangle');
-    const emailDisplay = document.getElementById('email-display');
     const email = localStorage.getItem('userEmail');
-    let timeoutId = null;
-
-    // if (!email) {
-    //     alert('No email found. Please start over.');
-    //     window.location.href = 'email.html'; // Redirect to email input page if no email found
-    // } else {
-    //     emailDisplay.textContent = Sent at ${email};
-    // }
-
-    otpInput.addEventListener('input', function () {
-        const otp = otpInput.value.trim(); // Trim whitespace from input
-
-        if (otp.length !== 6) {
-            resetValidation();
-            return;
-        }
-
-        otpInput.classList.add('typing'); // Add typing class when input is not empty
-        otpInput.classList.remove('error'); // Remove error class when typing
-        hideErrorMessage(); // Hide error message and reset styles when typing starts again
-
-        validateOTP(otp);
-    });
-
-    function validateOTP(otp) {
-        // Regular expression for basic OTP validation (digits only, length 6)
-        const otpRegex = /^\d{6}$/;
-
-        if (!otpRegex.test(otp)) {
-            showErrorMessage('Please enter a valid OTP');
-            otpInput.classList.add('error');
-            otpInput.classList.remove('typing'); // Remove typing class if there is an error
-        } else {
-            hideErrorMessage();
-            otpInput.classList.remove('error');
-        }
-
-        updateButtonState();
-    }
-
-    function resetValidation() {
-        hideErrorMessage();
-        otpInput.classList.remove('error');
-        updateButtonState();
-    }
-
-    function showErrorMessage(message) {
-        errorMessage.textContent = message;
-        errorMessage.style.display = 'block';
-        errorIcon.style.display = 'block';
-        otpInput.classList.add('error'); // Add error class to make the border red
-        otpInput.style.border = '3px solid red'; // Ensure border remains red
-    }
-
-    function hideErrorMessage() {
-        errorMessage.style.display = 'none';
-        errorIcon.style.display = 'none';
-        if (!otpInput.classList.contains('focused')) {
-            otpInput.style.border = '2px solid grey'; // Reset border color if not focused
-        } else {
-            otpInput.style.border = '3px solid black'; // Set default border on focus if not in error state
-        }
-    }
-
-    function updateButtonState() {
-        if (otpInput.value.trim().length !== 5) {
-            nextButton.disabled = true;
-            nextButton.style.opacity = '0.5'; // Set opacity to 0.5
-            nextButton.style.cursor = 'not-allowed'; // Set cursor to not-allowed
-        } else {
-            nextButton.disabled = false;
-            nextButton.style.opacity = '1'; // Set opacity to 1
-            nextButton.style.cursor = 'pointer'; // Set cursor to pointer
-        }
-    }
-
+    const messageClass = document.getElementById("message").innerHTML = `Sent at ${email}`
     nextButton.addEventListener('click', async function () {
         if (!nextButton.disabled) {
-            const otp = otpInput.value.trim();
+            // console.log(otpInput1.value);
+            // const otp = otpInput1.value + otpInput2.innerText + otpInput3.innerText + otpInput4.innerText + otpInput5.innerText;
+            console.log(otp);
 
             // Send OTP verification request to the backend
             try {
@@ -142,5 +71,56 @@ document.addEventListener('DOMContentLoaded', function () {
             otpInput.style.border = '1px solid black'; // Reset border to grey if input is empty
         }
         otpInput.style.borderRadius = '6px';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const inputsContainer = document.getElementById("inputs");
+    const inputs = inputsContainer.querySelectorAll(".enter");
+    let userManuallySelected = false;
+
+    // Focus on the first input when the inputs div is clicked and the user hasn't manually selected any input
+    inputsContainer.addEventListener('click', () => {
+        if (!userManuallySelected && inputs.length > 0) {
+            inputs[0].focus();
+        }
+    });
+
+    inputs.forEach((input) => {
+        input.addEventListener("input", function (e) {
+            const target = e.target;
+            const val = target.value;
+
+            if (isNaN(val)) {
+                target.value = "";
+                return;
+            }
+            otp+=val;
+            target.value ='.';
+            if (val !== "") {
+                const next = target.nextElementSibling;
+                if (next) {
+                    next.focus();
+                }
+            }
+        });
+
+        input.addEventListener("keyup", function (e) {
+            const target = e.target;
+            const key = e.key.toLowerCase();
+
+            if (key === "backspace" || key === "delete") {
+                target.value = "";
+                const prev = target.previousElementSibling;
+                if (prev) {
+                    prev.focus();
+                }
+            }
+        });
+
+        // Set the flag to true if the user manually selects any input
+        input.addEventListener('focus', () => {
+            userManuallySelected = true;
+        });
     });
 });

@@ -72,32 +72,52 @@ body, html {
     font-weight: 400;
 }
 
-.input {
+/* .input {
     width: 100%;
     margin-top: 24px;
-}
+}*/
+ .inputs{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height:56px;
+    border:1px solid black;
+    border-radius:6px;
+    padding:0 16px;
 
-input[type="number"] {
-    width: 100%;
-    height: 56px;
-    border-radius: 6px;
-    border: 1px solid black;
-    padding: 0 16px;
+
+ }
+ .inp{
+    width:100%;
+ }
+
+ .enter{
+    width:91.6px;
+    border:none;
+    text-align: center;
     font-size: 16px;
-    color:black;
-    transition: border-color 0.3s ease;
+    font-family: 'Victor Serif';
     font-weight:400;
-    font-family:'Victor Serif';
-}
+    line-height: 24px;
+    
+     }
 
-.content input[type="number"] {
-    color: black; /* Ensure text color is black */
+ .enter:focus{
+    /* border-bottom: 3px solid orange; */
+    outline: none;
+ }
+ /* .enter:nth-child(1) {
+    cursor: pointer;
+    pointer-events: all;
 }
+  */
 
-.content input:focus {
+
+/* .content input:focus {
     border-radius: 3px;
-    border: 3px solid black;
-}
+    /* border: 3px solid black; 
+} */
 
 .error {
     display: flex;
@@ -165,7 +185,7 @@ input[type="number"] {
   }
 
 @media (max-width: 650px) {
-    .container, .button-container button, input[type="number"] {
+    .container, .button-container button {
         width: 100%;
     }
     .container {
@@ -193,8 +213,8 @@ input[type="number"] {
         font-size: 16px;
         line-height: 24px;
     }
-    input[type="number"] {
-        font-size: 14px;
+    .enter{
+        width:18%;
     }
     .button-container {
         width: 100vw;

@@ -134,9 +134,6 @@ select::-ms-expand {
   color: black; /* Ensure text color is black */
 }
 
-.content select {
-  color: black;
-}
 
 .content select option {
   color: black;

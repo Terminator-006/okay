@@ -31,10 +31,34 @@ referencePhoneInput.addEventListener('input', toggleNextButton);
 // Initial check when the page loads
 toggleNextButton();
 document.addEventListener('DOMContentLoaded', function (){
-    nextButton.addEventListener('click', function () {
-        
-        if (!nextButton.disabled) {
-          window.location.href = '../Social Engagement/index.html'; // Redirect to the next page
+    nextButton.addEventListener('click', async function () {
+    const howHeardSelect = document.getElementById('how-heard').value;
+    const referencesInput = document.getElementById('references').value;
+    const referenceNameInput = document.getElementById('reference-name').value;
+    const referencePhoneInput = document.getElementById('reference-phone').value;
+    const data = {};
+    data["email"] = localStorage.getItem("userEmail");
+    data["Reference"] = referencesInput;
+    data["NameOfReference"] = referenceNameInput;
+    data["PhoneNoOfReference"] = referencePhoneInput;
+    console.log(data);
+
+    try {
+        const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          alert("submitted!");
+          window.location.href = '../Social Engagement/index.html';
+        } else {
+          const errorData = await response.json();
+          console.error('Error updating user information:', errorData);
         }
-      });
+      } catch (error) {
+        console.error('Error updating user information:', error);
+      }
+    });
 });
