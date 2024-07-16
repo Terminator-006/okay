@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
   dobInput.addEventListener('focus', function () {
     emError.style.display = 'none';
     dobInput.style.border = ''; // Reset border style when focusing on input again
-                                //also check for phone number
+                              //also check for phone number
 
   });
 

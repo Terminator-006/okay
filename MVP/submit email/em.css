@@ -50,9 +50,12 @@ body, html {
 }
 
 .message {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin-bottom: 16px;
   font-family: 'Victor Serif';
-  margin-right: 300px;
 }
 
 .message h4 {
@@ -60,7 +63,6 @@ body, html {
   line-height: 28px;
   font-weight: 600;
   margin-bottom: 4px;
-  margin-right: 24px;
 }
 
 .message p {
@@ -100,6 +102,9 @@ input.error {
   border: 3px solid red !important; /* Make the red border take precedence */
 }
 
+input.error:focus {
+  border: 3px solid red !important; /* Ensure red border on focus when in error state */
+}
 .error {
   display: flex;
   align-items: flex-start;
@@ -129,7 +134,7 @@ input.error {
   height: 88px;
   align-items: center;
   margin-top: 10px;
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 
@@ -173,12 +178,7 @@ button:enabled {
       padding-right: 8px;
   }
   .design {
-      width: 56px;
-      height: 56px;
-      border-radius: 200px;
-      position: absolute;
-      top: 0;
-      left: 0;
+     padding:0 16px 0 0 ;
   }
 
   .message h4 {
@@ -201,4 +201,10 @@ button:enabled {
 input.filled {
   font-weight: 600;
   border-color: grey;
+}
+@media (min-height: 320px){
+  .button-container{
+    position:fixed;
+    
+  }
 }

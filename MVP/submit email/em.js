@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     timeoutId = setTimeout(function () {
       validateEmail(email);
-    }, 1500);
+    }, 1000);
   });
 
   function validateEmail(email) {
@@ -31,9 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
       showErrorMessage('Please enter a valid email address');
       emailInput.classList.add('error');
       emailInput.classList.remove('typing'); // Remove typing class if there is an error
+      emailInput.classList.remove('focused'); // Remove focused class if there is an error
     } else {
       hideErrorMessage();
       emailInput.classList.remove('error');
+      if (emailInput.classList.contains('focused')) {
+        emailInput.style.border = '3px solid black'; // Set default border on focus if not in error state
+      }
     }
 
     updateButtonState();
@@ -76,29 +80,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
   nextButton.addEventListener('click', async function () {
     if (!nextButton.disabled) {
-        const email = emailInput.value.trim();
+      const email = emailInput.value.trim();
 
-        // Save email to local storage
-        localStorage.setItem('userEmail', email);
+      // Save email to local storage
+      localStorage.setItem('userEmail', email);
 
-        // Send OTP request to the backend
-        console.log(email);
-        const response = await fetch('https://regnum-backend-bice.vercel.app/send-otp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email })
-        });
+      // Send OTP request to the backend
+      console.log(email);
+      const response = await fetch('https://regnum-backend-bice.vercel.app/send-otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email })
+      });
 
-        if (response.ok) {
-            // Redirect to OTP verification page
-            window.location.href = '../Otp validation/index.html';
-        } else {
-            showErrorMessage('Error sending OTP. Please try again.');
-        }
+      if (response.ok) {
+        // Redirect to OTP verification page
+        window.location.href = '../Otp validation/index.html';
+      } else {
+        showErrorMessage('Error sending OTP. Please try again.');
+      }
     }
-});
+  });
 
   // Focus Event Handler
   emailInput.addEventListener('focus', function () {
