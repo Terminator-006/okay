@@ -16,28 +16,89 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    function getFileInputValues() {
+    function compressImage(imageFile) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(imageFile);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxWidth = 800;
+                    const maxHeight = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height *= maxWidth / width;
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width *= maxHeight / height;
+                            height = maxHeight;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    canvas.toBlob((blob) => {
+                        const compressedFile = new File([blob], imageFile.name, {
+                            type: imageFile.type,
+                            lastModified: Date.now(),
+                        });
+                        resolve(compressedFile);
+                    }, 'image/jpeg', 0.7);
+                };
+                img.onerror = (error) => {
+                    reject(error);
+                };
+            };
+            reader.onerror = (error) => {
+                reject(error);
+            };
+        });
+    }
+
+    async function convertToBase64(imageFile) {
+        const compressedFile = await compressImage(imageFile);
+        return new Promise((resolve, reject) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(compressedFile);
+            reader.onload = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = error => {
+                reject(error);
+            };
+        });
+    }
+
+    async function getFileInputValues() {
         const fileInputValues = [];
         const fileInputs = document.querySelectorAll('input[type="file"]');
       
-        fileInputs.forEach(input => {
-          if (input.files.length > 0) {
-            fileInputValues.push(input.files[0]);
-          }
-        });
+        for (const input of fileInputs) {
+            if (input.files.length > 0) {
+                const base64 = await convertToBase64(input.files[0]);
+                fileInputValues.push(base64);
+            }
+        }
       
         return fileInputValues;
-      }
+    }
 
     nextButton.addEventListener('click', async function () {
-        const fileInputValues = getFileInputValues();
-        console.log(typeof(fileInputValues)); // You can use these values as needed
+        const fileInputValues = await getFileInputValues();
         let data = {};
         data["email"] = localStorage.getItem("userEmail");
-        data["CouplePhoto1"] = fileInputValues[0]
-        data["CouplePhoto2"] = fileInputValues[1]
-        data["MalePicture"] = fileInputValues[2]
-        data["FemalePicture"] = fileInputValues[3]
+        data["CouplePhoto1"] = fileInputValues[0];
+        data["CouplePhoto2"] = fileInputValues[1];
+        data["MalePicture"] = fileInputValues[2];
+        data["FemalePicture"] = fileInputValues[3];
         console.log(data);
         try {
             const response = await fetch('https://regnum-backend-bice.vercel.app/update-details', {
@@ -53,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function () {
               const errorData = await response.json();
               console.error('Error updating user information:', errorData);
             }
-          } catch (error) {
+        } catch (error) {
             console.error('Error updating user information:', error);
-          }
+        }
     });
 });
 
@@ -86,7 +147,7 @@ function previewImage1(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='5px';
+            img.style.borderRadius ='6px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview1');
             imagePreview.innerHTML = '';
@@ -117,7 +178,7 @@ function previewImage2(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='5px';
+            img.style.borderRadius ='6px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview2');
             imagePreview.innerHTML = '';
@@ -148,7 +209,7 @@ function previewImage3(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='5px';
+            img.style.borderRadius ='6px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview3');
             imagePreview.innerHTML = '';
@@ -179,7 +240,7 @@ function previewImage4(event) {
             img.src = e.target.result;
             img.style.width = '100%';
             img.style.height = '100%';
-            img.style.borderRadius ='5px';
+            img.style.borderRadius ='6px';
             img.style.objectFit ='cover';
             const imagePreview = document.getElementById('imagePreview4');
             imagePreview.innerHTML = '';
